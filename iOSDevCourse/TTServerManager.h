@@ -146,5 +146,11 @@ extern NSString * const iOSDevCourseGroupID;
                    onSuccess:(void (^)(id responseObject))success
                    onFailure:(void (^)(NSError *error))failure;
 
+- (void)repostOnMyWall:(NSString*)groupID
+                inPost:(NSString*)postID
+           withMessage:(NSString*)message
+             onSuccess:(void(^)(NSDictionary* result))success
+             onFailure:(void(^)(NSError* error, NSInteger statusCode))failure;
+
 
 @end

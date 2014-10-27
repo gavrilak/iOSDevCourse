@@ -538,7 +538,7 @@ NSString * const iOSDevCourseGroupID = @"58860049";
 
 }
 
-- (void) postLikeOnWall:(NSString*)groupID
+- (void)postLikeOnWall:(NSString*)groupID
                  inPost:(NSString*)postID
                    type:(NSString *)type
               onSuccess:(void(^)(NSDictionary* result))success
@@ -578,7 +578,44 @@ NSString * const iOSDevCourseGroupID = @"58860049";
 
 }
 
-- (void) postDeleteLikeOnWall:(NSString*)groupID
+- (void)repostOnMyWall:(NSString*)groupID
+                 inPost:(NSString*)postID
+            withMessage:(NSString*)message
+              onSuccess:(void(^)(NSDictionary* result))success
+              onFailure:(void(^)(NSError* error, NSInteger statusCode))failure {
+    
+    
+    NSString *idGroup = [NSString stringWithFormat:@"%@",groupID];
+        
+        if (![idGroup hasPrefix:@"-"]) {
+            idGroup = [@"-" stringByAppendingString:idGroup];
+        }
+    
+    NSString *object = [NSString stringWithFormat:@"wall%@_%@",idGroup,postID];
+    
+    NSDictionary *parameters = @{@"object"          : object,
+                                 @"message"         : message,
+                                 @"v"               : @"5.21",
+                                 @"access_token"    : self.accessToken.token };
+    
+    [self.requestOperationManager POST:@"wall.repost" parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
+        
+        
+        
+        if (success) {
+            success(responseObject);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if (failure) {
+            failure(error, operation.response.statusCode);
+        }
+    }];
+    
+}
+
+- (void)postDeleteLikeOnWall:(NSString*)groupID
                        inPost:(NSString*)postID
                          type:(NSString *)type
                     onSuccess:(void(^)(NSDictionary* result))success

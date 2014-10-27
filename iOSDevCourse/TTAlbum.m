@@ -19,7 +19,7 @@
         self.title = [responseObject objectForKey:@"title"];
         self.albumid = [NSString stringWithFormat:@"%ld",(long)[[responseObject objectForKey:@"id"] integerValue]];
         self.size = [NSString stringWithFormat:@"%ld",(long)[[responseObject objectForKey:@"size"] integerValue]];
-        self.description = [responseObject objectForKey:@"description"];  
+        self.desc = [responseObject objectForKey:@"description"];  
     }
     return self;
 }

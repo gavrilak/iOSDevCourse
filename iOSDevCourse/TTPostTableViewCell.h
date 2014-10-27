@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *addLikeBtn;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postTextLabel;
+@property (weak, nonatomic) IBOutlet UIButton *repostBtn;
 
 @end

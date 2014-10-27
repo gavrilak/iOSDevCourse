@@ -21,7 +21,7 @@
         self.videoid = [responseObject objectForKey:@"id"];
         self.owner_id = [NSString stringWithFormat:@"%ld",(long)[[responseObject objectForKey:@"owner_id"]integerValue]];
         self.photoURL = [responseObject objectForKey:@"photo_320"];
-        self.description = [responseObject objectForKey:@"description"];
+        self.desc = [responseObject objectForKey:@"description"];
         self.playerURl = [responseObject objectForKey:@"player"];
         self.views = [NSString stringWithFormat:@"%ld",(long)[[responseObject objectForKey:@"views"] integerValue]];
         

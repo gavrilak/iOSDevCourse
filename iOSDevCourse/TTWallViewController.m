@@ -376,6 +376,24 @@ static CGSize CGSizeResizeToHeight(CGSize size, CGFloat height) {
     
 }
 
+- (void)repost:(UIButton *)sender {
+    
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+    
+    TTWall *wall = [self.wallPostsArray objectAtIndex:indexPath.row];
+    
+    [[TTServerManager sharedManager]repostOnMyWall:wall.owner_id inPost:wall.post_id withMessage:@"test" onSuccess:^(NSDictionary *result) {
+        
+        NSLog(@"%@",result);
+        
+    } onFailure:^(NSError *error, NSInteger statusCode) {
+        
+    }];
+    
+}
+
 #pragma mark - TTAddPostDelegete
 
 - (void)updateData {
@@ -579,6 +597,7 @@ static CGSize CGSizeResizeToHeight(CGSize size, CGFloat height) {
         [cell.addComentBtn setTitle:wall.comments_count forState:UIControlStateNormal];
         
         [cell.addLikeBtn addTarget:self action:@selector(addLike:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.repostBtn addTarget:self action:@selector(repost:) forControlEvents:UIControlEventTouchUpInside];
         [cell.addComentBtn addTarget:self action:@selector(addComment:) forControlEvents:UIControlEventTouchUpInside];
         
         __weak TTPostTableViewCell *weakCell = cell;
@@ -622,6 +641,11 @@ static CGSize CGSizeResizeToHeight(CGSize size, CGFloat height) {
                                                CGRectGetWidth(cell.addLikeBtn.frame),
                                                CGRectGetHeight(cell.addLikeBtn.frame));
             
+            cell.repostBtn.frame = CGRectMake(CGRectGetMinX(cell.repostBtn.frame),
+                                               CGRectGetMaxY(galery.frame),
+                                               CGRectGetWidth(cell.repostBtn.frame),
+                                               CGRectGetHeight(cell.repostBtn.frame));
+            
             cell.addComentBtn.frame = CGRectMake(CGRectGetMinX(cell.addComentBtn.frame),
                                                CGRectGetMaxY(galery.frame),
                                                CGRectGetWidth(cell.addComentBtn.frame),
@@ -632,6 +656,11 @@ static CGSize CGSizeResizeToHeight(CGSize size, CGFloat height) {
                                                CGRectGetMaxY(cell.postTextLabel.frame),
                                                CGRectGetWidth(cell.addLikeBtn.frame),
                                                CGRectGetHeight(cell.addLikeBtn.frame));
+            
+            cell.repostBtn.frame = CGRectMake(CGRectGetMinX(cell.repostBtn.frame),
+                                              CGRectGetMaxY(cell.postTextLabel.frame),
+                                              CGRectGetWidth(cell.repostBtn.frame),
+                                              CGRectGetHeight(cell.repostBtn.frame));
             
             cell.addComentBtn.frame = CGRectMake(CGRectGetMinX(cell.addComentBtn.frame),
                                                  CGRectGetMaxY(cell.postTextLabel.frame),

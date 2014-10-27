@@ -11,7 +11,7 @@
 @interface TTGroup : NSObject
 
 @property (strong,nonatomic) NSString *group_id;
-@property (strong,nonatomic) NSString *description;
+@property (strong,nonatomic) NSString *desc;
 @property (strong,nonatomic) NSString *name;
 @property (assign,nonatomic) BOOL is_closed;
 @property (assign,nonatomic) BOOL is_member;
